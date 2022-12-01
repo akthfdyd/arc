@@ -1,0 +1,9 @@
+dartdoc:
+  categories:
+    "How to use":
+      markdown: lib/topics/how_to_use.md
+    "Components":
+      markdown: lib/topics/components.md
+  categoryOrder:
+    - "How to use"
+    - "Components"

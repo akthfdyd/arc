@@ -2,6 +2,8 @@ import 'package:arc/arc.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
+/// {@category Components}
+/// [ArcSubject] is wrapper of RxDart [BehaviorSubject],
 class ArcSubject<T> {
   ArcSubject({T? seed}) {
     if (seed != null) {
@@ -30,6 +32,9 @@ class ArcSubject<T> {
     subject.close();
   }
 
+  /// Possible types
+  /// primitive : double, int, bool, String, List<String>
+  /// others : which overrides [toString] method to return serialized String.
   Future<bool>? save(String key) {
     if (Arc.preferences == null) print("arc need init");
     if (val != null) {
@@ -49,6 +54,8 @@ class ArcSubject<T> {
     }
   }
 
+  /// Possible types
+  /// primitive : double, int, bool, String, List<String>
   void load(String key) {
     if (Arc.preferences == null) print("arc need init");
 

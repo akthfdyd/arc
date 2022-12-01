@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// {@category Components}
+/// [NavigationService] is tracking [Navigator],
+/// so using current context, use [Navigator] without context
 abstract class NavigationService {
   GlobalKey<NavigatorState> get navigatorKey;
 
