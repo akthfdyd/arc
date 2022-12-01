@@ -2,6 +2,16 @@
 
 Architecture component for Flutter development
 
+## pubspec.yaml
+
+``` yaml
+dependencies:
+  arc:
+    git: https://github.com/akthfdyd/arc.git
+```
+
+## example
+
 ``` dart
 // section: Initialize, just call once in your app lifecycle.
 Arc();
