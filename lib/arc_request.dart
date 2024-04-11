@@ -175,17 +175,17 @@ class AHttp {
       print('HttpRequest requestTail res.statusCode == ${res.statusCode}');
     }
     if (res.statusCode == 401) {
-      throw Exception('HttpRequest requestTail 401 error');
+      throw AHttpException('HttpRequest requestTail 401 error', res);
     } else if (res.statusCode ~/ 100 == 2) {
       return res;
     } else if (res.statusCode ~/ 100 == 3) {
-      throw Exception('HttpRequest requestTail 3xx error');
+      throw AHttpException('HttpRequest requestTail 3xx error', res);
     } else if (res.statusCode ~/ 100 == 4) {
-      throw Exception('HttpRequest requestTail 4xx error');
+      throw AHttpException('HttpRequest requestTail 4xx error', res);
     } else if (res.statusCode ~/ 100 == 5) {
-      throw Exception('HttpRequest requestTail 5xx error');
+      throw AHttpException('HttpRequest requestTail 5xx error', res);
     } else {
-      throw Exception('HttpRequest requestTail etc error');
+      throw AHttpException('HttpRequest requestTail etc error', res);
     }
   }
 
@@ -200,5 +200,25 @@ class AHttp {
         return true;
       });
     }
+  }
+}
+
+class AHttpException implements Exception {
+  final dynamic message;
+  final http.Response? response;
+
+  AHttpException([
+    this.message,
+    this.response,
+  ]);
+
+  String toString() {
+    Object? message = this.message;
+    if (message == null) return "Exception";
+    return "Exception: $message\nstatus: ${response?.statusCode}\nbody: ${response?.body}";
+  }
+
+  bool hasResponse() {
+    return (response != null);
   }
 }
