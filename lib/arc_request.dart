@@ -67,7 +67,7 @@ class AHttp {
       }
     } catch (error, stacktrace) {
       if (kDebugMode) {
-        print('HttpRequest postRequest parameter json encode failed >> ' +
+        print('AHttp postRequest parameter json encode failed >> ' +
             stacktrace.toString());
       }
     }
@@ -88,14 +88,14 @@ class AHttp {
   static Future<http.Response> putRequest(
       String path, Map<String, dynamic> param, Map<String, String> header) {
     if (kDebugMode) {
-      print('HttpRequest putRequest');
+      print('AHttp putRequest');
     }
     String? bodyJson;
     try {
       bodyJson = json.encode(param);
     } catch (error, stacktrace) {
       if (kDebugMode) {
-        print('HttpRequest putRequest parameter json encode failed' +
+        print('AHttp putRequest parameter json encode failed' +
             stacktrace.toString());
       }
     }
@@ -119,7 +119,7 @@ class AHttp {
   static Future<http.Response> getRequest(
       String path, Map<String, dynamic> param, Map<String, String> header) {
     if (kDebugMode) {
-      print('HttpRequest getRequest');
+      print('AHttp getRequest');
     }
     try {
       var url = path + Uri(queryParameters: param).toString();
@@ -143,7 +143,7 @@ class AHttp {
   static Future<http.Response> deleteRequest(
       String path, Map<String, dynamic> param, Map<String, String> header) {
     if (kDebugMode) {
-      print('HttpRequest deleteRequest');
+      print('AHttp deleteRequest');
     }
     try {
       var url = path + Uri(queryParameters: param).toString();
@@ -171,21 +171,13 @@ class AHttp {
     Map<String, dynamic> param,
   ) async {
     if (kDebugMode) {
-      print('HttpRequest requestTail $path');
-      print('HttpRequest requestTail res.statusCode == ${res.statusCode}');
+      print('AHttp $path');
+      print('AHttp res.statusCode == ${res.statusCode}');
     }
-    if (res.statusCode == 401) {
-      throw AHttpException('HttpRequest requestTail 401 error', res);
-    } else if (res.statusCode ~/ 100 == 2) {
+    if (res.statusCode ~/ 100 == 2) {
       return res;
-    } else if (res.statusCode ~/ 100 == 3) {
-      throw AHttpException('HttpRequest requestTail 3xx error', res);
-    } else if (res.statusCode ~/ 100 == 4) {
-      throw AHttpException('HttpRequest requestTail 4xx error', res);
-    } else if (res.statusCode ~/ 100 == 5) {
-      throw AHttpException('HttpRequest requestTail 5xx error', res);
     } else {
-      throw AHttpException('HttpRequest requestTail etc error', res);
+      throw AHttpException('AHttpException', res);
     }
   }
 
