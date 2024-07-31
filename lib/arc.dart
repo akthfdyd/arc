@@ -33,8 +33,12 @@ class Arc {
   static init() {
     isInit = true;
     print("Arc init");
-    GetIt.I.registerSingleton<NavigationService>(NavigationServiceImpl());
-    GetIt.I.registerSingleton<PreferencesService>(PreferencesService());
+    if (!GetIt.I.isRegistered(instance: NavigationServiceImpl())) {
+      GetIt.I.registerSingleton<NavigationService>(NavigationServiceImpl());
+    }
+    if (!GetIt.I.isRegistered(instance: PreferencesService())) {
+      GetIt.I.registerSingleton<PreferencesService>(PreferencesService());
+    }
     GetIt.I<PreferencesService>().init().then((value) {
       preferences = GetIt.I<PreferencesService>().instance;
     });
