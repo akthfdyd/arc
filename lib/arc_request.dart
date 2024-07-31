@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:arc/arc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:http/io_client.dart';
 
@@ -22,7 +21,7 @@ class AHttp {
       // header['Content-Type'] = 'application/json';
     }
 
-    late http.Response res;
+    late Response res;
     try {
       switch (method) {
         case HttpMethod.POST:
@@ -54,7 +53,7 @@ class AHttp {
     }
   }
 
-  static Future<http.Response> postRequest(
+  static Future<Response> postRequest(
       String path, Map<String, dynamic> param, Map<String, String> header) {
     if (kDebugMode) {
       print('postRequest');
@@ -85,7 +84,7 @@ class AHttp {
     }
   }
 
-  static Future<http.Response> putRequest(
+  static Future<Response> putRequest(
       String path, Map<String, dynamic> param, Map<String, String> header) {
     if (kDebugMode) {
       print('AHttp putRequest');
@@ -116,7 +115,7 @@ class AHttp {
     }
   }
 
-  static Future<http.Response> getRequest(
+  static Future<Response> getRequest(
       String path, Map<String, dynamic> param, Map<String, String> header) {
     if (kDebugMode) {
       print('AHttp getRequest');
@@ -140,7 +139,7 @@ class AHttp {
     }
   }
 
-  static Future<http.Response> deleteRequest(
+  static Future<Response> deleteRequest(
       String path, Map<String, dynamic> param, Map<String, String> header) {
     if (kDebugMode) {
       print('AHttp deleteRequest');
@@ -164,9 +163,9 @@ class AHttp {
     }
   }
 
-  static Future<http.Response> requestTail(
+  static Future<Response> requestTail(
     HttpMethod httpMethod,
-    http.Response res,
+    Response res,
     String path,
     Map<String, dynamic> param,
   ) async {
@@ -197,7 +196,7 @@ class AHttp {
 
 class AHttpException implements Exception {
   final dynamic message;
-  final http.Response? response;
+  final Response? response;
 
   AHttpException([
     this.message,
