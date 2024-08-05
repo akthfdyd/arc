@@ -9,6 +9,9 @@ import 'package:http/io_client.dart';
 enum HttpMethod { POST, PUT, GET, DELETE }
 
 class AHttp {
+  static bool useProxy = false;
+  static String proxyAddress = '';
+
   static Future<Response> request({
     required HttpMethod method,
     required String url,
@@ -181,8 +184,8 @@ class AHttp {
   }
 
   static void setProxy(HttpClient httpClient) {
-    if (Arc.useProxy && !kReleaseMode) {
-      String proxy = Arc.proxyAddress;
+    if (useProxy && !kReleaseMode) {
+      String proxy = proxyAddress;
       httpClient.findProxy = (uri) {
         return 'PROXY $proxy;';
       };

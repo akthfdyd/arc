@@ -12,8 +12,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Arc {
   // section: singleton
   static final Arc _instance = Arc._internal();
-  static bool useProxy = false;
-  static String proxyAddress = '';
 
   /// It works as static instance. So, even you call constructor many times, initialize only once.
   factory Arc() {
